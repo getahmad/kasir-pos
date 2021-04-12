@@ -4,6 +4,8 @@ import styled, { ThemeProvider } from "styled-components";
 import * as theme from "./styled/theme";
 import { useSelector } from "react-redux";
 import CartItem from "components/CartItem";
+import { ListMenu } from "components/ListMenu";
+import { CalculateBox } from "./components/CalculateBox";
 
 
 const Container = styled.div`
@@ -37,7 +39,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header />
       <Container>
-        <MenuContainer>Menu</MenuContainer>
+        <MenuContainer>
+          <ListMenu/>
+        </MenuContainer>
         <ProductContainer>
           {products.map((product) => (
             <ProductCard key={product.id} item={product} />
@@ -45,6 +49,7 @@ function App() {
         </ProductContainer>
         <CartContainer>
           <CartItem/>
+          <CalculateBox/>
         </CartContainer>
       </Container>
     </ThemeProvider>
