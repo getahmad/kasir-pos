@@ -7,7 +7,6 @@ import CartItem from "components/CartItem";
 import { ListMenu } from "components/ListMenu";
 import { CalculateBox } from "./components/CalculateBox";
 
-
 const Container = styled.div`
   display: flex;
   width: 100vw;
@@ -35,12 +34,14 @@ const CartContainer = styled.div`
 
 function App() {
   const products = useSelector((state) => state.product.products);
+  const carts = useSelector((state) => state.product.carts);
+
   return (
     <ThemeProvider theme={theme}>
       <Header />
       <Container>
         <MenuContainer>
-          <ListMenu/>
+          <ListMenu />
         </MenuContainer>
         <ProductContainer>
           {products.map((product) => (
@@ -48,8 +49,11 @@ function App() {
           ))}
         </ProductContainer>
         <CartContainer>
-          <CartItem/>
-          <CalculateBox/>
+          <p>{carts ? `${carts.length}item in cart` : "0 item in cart"}</p>
+          {carts.map((item) => (
+            <CartItem key={item.id} item={item} />
+          ))}
+          <CalculateBox />
         </CartContainer>
       </Container>
     </ThemeProvider>
